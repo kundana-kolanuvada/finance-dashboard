@@ -1,25 +1,43 @@
-import { createContext, useState } from "react";
-import { transactions as mockData } from "../data/mockData";
+import { createContext, useContext, useEffect, useState } from "react";
+import { MOCK_TRANSACTIONS } from "../data/mockData";
 
-export const AppContext = createContext();
+const AppContext = createContext();
 
-export const AppProvider = ({ children }) => {
-  const [transactions, setTransactions] = useState(mockData);
-  const [role, setRole] = useState("viewer"); // viewer | admin
-  const [search, setSearch] = useState("");
+export function AppProvider({ children }) {
+  const [transactions, setTransactions] = useState(() => {
+    const saved = localStorage.getItem("tx");
+    return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS;
+  });
+
+  const [role, setRole] = useState("viewer");
+  const [searchQuery, setSearchQuery] = useState("");
+
+  useEffect(() => {
+    localStorage.setItem("tx", JSON.stringify(transactions));
+  }, [transactions]);
+
+  const addTransaction = (tx) =>
+    setTransactions(prev => [{ ...tx, id: Date.now() }, ...prev]);
+
+  const deleteTransaction = (id) =>
+    setTransactions(prev => prev.filter(t => t.id !== id));
+
+  const income = transactions.filter(t=>t.type==="income")
+    .reduce((a,b)=>a+b.amount,0);
+
+  const expense = transactions.filter(t=>t.type==="expense")
+    .reduce((a,b)=>a+b.amount,0);
 
   return (
-    <AppContext.Provider
-      value={{
-        transactions,
-        setTransactions,
-        role,
-        setRole,
-        search,
-        setSearch,
-      }}
-    >
+    <AppContext.Provider value={{
+      transactions, role, setRole,
+      searchQuery, setSearchQuery,
+      addTransaction, deleteTransaction,
+      income, expense, balance: income-expense
+    }}>
       {children}
     </AppContext.Provider>
   );
-};
+}
+
+export const useApp = () => useContext(AppContext);

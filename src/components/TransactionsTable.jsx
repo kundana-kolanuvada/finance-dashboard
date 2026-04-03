@@ -1,48 +1,51 @@
-import { useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { useState } from "react";
+import { useApp } from "../context/AppContext";
+import AddTransactionModal from "./AddTransactionModal";
 
-const TransactionsTable = () => {
-  const { transactions, search, setSearch, role } = useContext(AppContext);
+export default function TransactionsTable() {
+  const { transactions, role, searchQuery, setSearchQuery, deleteTransaction } = useApp();
+  const [open,setOpen]=useState(false);
 
   const filtered = transactions.filter(t =>
-    t.category.toLowerCase().includes(search.toLowerCase())
+    t.description.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
   return (
-    <div>
+    <div className="card">
       <h2>Transactions</h2>
 
       <input
-        placeholder="Search category..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
+        className="search-input"
+        placeholder="Search..."
+        value={searchQuery}
+        onChange={(e)=>setSearchQuery(e.target.value)}
       />
 
-      <table border="1" width="100%">
+      {role==="admin" && <button className="btn" onClick={()=>setOpen(true)}>+ Add</button>}
+
+      <table className="transactions-table">
         <thead>
           <tr>
-            <th>Date</th>
-            <th>Amount</th>
-            <th>Category</th>
-            <th>Type</th>
+            <th>Date</th><th>Description</th><th>Amount</th>
+            {role==="admin" && <th>Action</th>}
           </tr>
         </thead>
 
         <tbody>
-          {filtered.map(t => (
+          {filtered.map(t=>(
             <tr key={t.id}>
               <td>{t.date}</td>
+              <td>{t.description}</td>
               <td>₹{t.amount}</td>
-              <td>{t.category}</td>
-              <td>{t.type}</td>
+              {role==="admin" && (
+                <td><button onClick={()=>deleteTransaction(t.id)}>Delete</button></td>
+              )}
             </tr>
           ))}
         </tbody>
       </table>
 
-      {role === "admin" && <button>Add Transaction</button>}
+      {open && <AddTransactionModal onClose={()=>setOpen(false)}/>}
     </div>
   );
-};
-
-export default TransactionsTable;
+}

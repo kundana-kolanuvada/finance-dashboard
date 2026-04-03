@@ -1,0 +1,63 @@
+body {
+  margin:0;
+  font-family: Inter;
+  background:#0f1221;
+  color:white;
+}
+
+.app-layout { display:flex; height:100vh; }
+
+.sidebar {
+  width:220px;
+  background:#171a2e;
+  padding:20px;
+}
+
+.sidebar-logo {
+  font-size:20px;
+  font-weight:bold;
+  margin-bottom:20px;
+}
+.sidebar-logo span { color:#7c6af7; }
+
+.nav-item {
+  display:block;
+  margin:10px 0;
+  padding:10px;
+  border:none;
+  background:transparent;
+  color:#aaa;
+  cursor:pointer;
+}
+
+.nav-item.active {
+  background:#7c6af7;
+  color:white;
+  border-radius:8px;
+}
+
+.main-content { flex:1; padding:30px; }
+
+.summary-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+.summary-card {
+  background:#1c2038;
+  padding:20px;
+  border-radius:12px;
+}
+
+.card {
+  background:#1c2038;
+  padding:20px;
+  border-radius:12px;
+}
+
+.search-input {
+  padding:10px;
+  margin-bottom:10px;
+  width:100%;
+}
