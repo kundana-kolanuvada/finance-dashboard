@@ -15,7 +15,7 @@ export function AppProvider({ children }) {
     localStorage.setItem("tx", JSON.stringify(transactions));
   }, [transactions]);
 
-  // ➕ ADD
+  // ADD
   const addTransaction = (tx) => {
     setTransactions(prev => [
       { ...tx, id: Date.now() },
@@ -23,19 +23,19 @@ export function AppProvider({ children }) {
     ]);
   };
 
-  // ❌ DELETE
+  // DELETE
   const deleteTransaction = (id) => {
     setTransactions(prev => prev.filter(t => t.id !== id));
   };
 
-  // ✏️ EDIT (IMPORTANT FIX)
+  // EDIT
   const editTransaction = (updatedTx) => {
     setTransactions(prev =>
       prev.map(t => (t.id === updatedTx.id ? updatedTx : t))
     );
   };
 
-  // CALCULATIONS
+  // CALCULATION
   const income = transactions
     .filter(t => t.type === "income")
     .reduce((a, b) => a + b.amount, 0);
