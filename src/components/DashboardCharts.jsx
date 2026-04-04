@@ -17,21 +17,20 @@ export default function DashboardCharts() {
   const { transactions } = useApp();
   const [range, setRange] = useState(6);
 
-  // 👉 CREATE LAST 12 MONTHS
+  // LAST 12 MON
   const getMonths = () => {
     const months = [];
     const now = new Date();
 
     for (let i = 11; i >= 0; i--) {
       const d = new Date(now.getFullYear(), now.getMonth() - i, 1);
-      const label = d.toLocaleString("default", {
-        month: "short",
-        year: "2-digit",
-      });
 
       months.push({
         key: d.toISOString().slice(0, 7),
-        label,
+        label: d.toLocaleString("default", {
+          month: "short",
+          year: "2-digit",
+        }),
         income: 0,
         expense: 0,
       });
@@ -42,7 +41,7 @@ export default function DashboardCharts() {
 
   const monthsData = getMonths();
 
-  // 👉 MAP DATA
+  // MAP DATA
   transactions.forEach((t) => {
     const key = t.date.slice(0, 7);
     const found = monthsData.find((m) => m.key === key);
@@ -53,8 +52,9 @@ export default function DashboardCharts() {
     }
   });
 
-  // 👉 BALANCE CALC
+  // BALANCE TREND
   let running = 0;
+
   const trendData = monthsData.map((m) => {
     running += m.income - m.expense;
     return { date: m.label, balance: running };
@@ -62,10 +62,10 @@ export default function DashboardCharts() {
 
   const finalTrend = trendData.slice(-range);
 
-  // 👉 FORMAT ₹K
+  // K FORMAT
   const formatK = (v) => (v >= 1000 ? v / 1000 + "k" : v);
 
-  // 👉 DONUT DATA
+  // DONUT DATA
   const categoryData = {};
   transactions
     .filter((t) => t.type === "expense")
@@ -82,6 +82,7 @@ export default function DashboardCharts() {
     percent: ((value / total) * 100).toFixed(0),
   }));
 
+  // pastel colors
   const COLORS = [
     "#a5b4fc",
     "#6ee7b7",
@@ -90,6 +91,33 @@ export default function DashboardCharts() {
     "#93c5fd",
     "#f9a8d4",
   ];
+
+  const CustomTooltip = ({ active, payload, label }) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="custom-tooltip">
+          <p>{label}</p>
+          <p>₹{payload[0].value}</p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const DonutTooltip = ({ active, payload }) => {
+    if (active && payload && payload.length) {
+      const data = payload[0].payload;
+
+      return (
+        <div className="custom-tooltip">
+          <p>{data.name}</p>
+          <p>₹{data.value}</p>
+          <p>{data.percent}%</p>
+        </div>
+      );
+    }
+    return null;
+  };
 
   return (
     <div className="charts-grid">
@@ -114,13 +142,18 @@ export default function DashboardCharts() {
             <CartesianGrid stroke="#222" />
             <XAxis dataKey="date" stroke="#9ca3af" />
             <YAxis tickFormatter={formatK} stroke="#9ca3af" />
-            <Tooltip />
-            <Line dataKey="balance" stroke="#6366f1" strokeWidth={2} />
+            <Tooltip content={<CustomTooltip />} />
+            <Line
+              type="monotone"
+              dataKey="balance"
+              stroke="#6366f1"
+              strokeWidth={2}
+            />
           </LineChart>
         </ResponsiveContainer>
       </div>
 
-      {/* DONUT */}
+      {/* DONUT CHART */}
       <div className="card">
         <h2>Spending by Category</h2>
 
@@ -136,10 +169,12 @@ export default function DashboardCharts() {
                 <Cell key={i} fill={COLORS[i % COLORS.length]} />
               ))}
             </Pie>
+
+            <Tooltip content={<DonutTooltip />} />
           </PieChart>
         </ResponsiveContainer>
 
-        {/* LEGEND GRID */}
+        {/* LEGEND */}
         <div className="donut-legend">
           {pieData.map((item, i) => (
             <div key={i} className="legend-item">

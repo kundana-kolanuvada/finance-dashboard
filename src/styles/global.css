@@ -521,6 +521,16 @@ h3 {
   opacity: 0.8;
 }
 
+/* TOOLTIP */
+.custom-tooltip {
+  background: #111;
+  border: 1px solid #333;
+  padding: 8px 10px;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 12px;
+}
+
 /* DROPDOWN */
 .range-dropdown {
   background: #111;
@@ -535,22 +545,21 @@ h3 {
   display: grid;
   grid-template-columns: 2fr 1fr;
   gap: 20px;
-  margin-top: 20px;
 }
 
-/* ALIGN HEADER */
+/* HEADER ALIGN */
 .chart-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-/* LEGEND GRID */
+/* LEGEND */
 .donut-legend {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  margin-top: 10px;
   gap: 6px;
+  margin-top: 10px;
 }
 
 .legend-item {
@@ -559,7 +568,6 @@ h3 {
   display: flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 5px;
 }
 
 .dot {
