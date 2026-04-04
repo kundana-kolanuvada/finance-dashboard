@@ -184,3 +184,44 @@ body {
   gap: 10px;
 }
 
+.top-bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.search-small {
+  width: 160px;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2f4a;
+  color: white;
+}
+
+.top-bar select {
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2f4a;
+  color: white;
+}
+
+.edit-btn {
+  background: #1f2937;
+  color: white;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  margin-right: 5px;
+  cursor: pointer;
+}
+
+.pagination-bar {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
