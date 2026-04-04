@@ -9,30 +9,39 @@ export function AppProvider({ children }) {
     return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS;
   });
 
-  const [role, setRole] = useState("viewer");
-  const [searchQuery, setSearchQuery] = useState("");
+  const [role, setRole] = useState("admin");
 
   useEffect(() => {
     localStorage.setItem("tx", JSON.stringify(transactions));
   }, [transactions]);
 
-  const addTransaction = (tx) =>
-    setTransactions((prev) => [{ ...tx, id: Date.now() }, ...prev]);
+  // ➕ ADD
+  const addTransaction = (tx) => {
+    setTransactions(prev => [
+      { ...tx, id: Date.now() },
+      ...prev
+    ]);
+  };
 
-  const deleteTransaction = (id) =>
-    setTransactions((prev) => prev.filter((t) => t.id !== id));
+  // ❌ DELETE
+  const deleteTransaction = (id) => {
+    setTransactions(prev => prev.filter(t => t.id !== id));
+  };
 
-  const editTransaction = (updatedTx) =>
-    setTransactions((prev) =>
-      prev.map((t) => (t.id === updatedTx.id ? updatedTx : t))
+  // ✏️ EDIT (IMPORTANT FIX)
+  const editTransaction = (updatedTx) => {
+    setTransactions(prev =>
+      prev.map(t => (t.id === updatedTx.id ? updatedTx : t))
     );
+  };
 
+  // CALCULATIONS
   const income = transactions
-    .filter((t) => t.type === "income")
+    .filter(t => t.type === "income")
     .reduce((a, b) => a + b.amount, 0);
 
   const expense = transactions
-    .filter((t) => t.type === "expense")
+    .filter(t => t.type === "expense")
     .reduce((a, b) => a + b.amount, 0);
 
   return (
@@ -41,14 +50,12 @@ export function AppProvider({ children }) {
         transactions,
         role,
         setRole,
-        searchQuery,
-        setSearchQuery,
         addTransaction,
         deleteTransaction,
         editTransaction,
         income,
         expense,
-        balance: income - expense,
+        balance: income - expense
       }}
     >
       {children}

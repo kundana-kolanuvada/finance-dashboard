@@ -33,60 +33,92 @@ export default function AddTransactionModal({ onClose, editData }) {
   };
 
   return (
-    <div className="modal">
-      <h3>{editData ? "Edit" : "Add"} Transaction</h3>
+    <div className="modal-overlay">
+      <div className="modal">
 
-      <input
-        value={form.description}
-        placeholder="Description"
-        onChange={(e) =>
-          setForm({ ...form, description: e.target.value })
-        }
-      />
+        {/* HEADER */}
+        <h3 className="modal-title">
+          {editData ? "Edit Transaction" : "Add Transaction"}
+        </h3>
 
-      <input
-        type="number"
-        value={form.amount}
-        placeholder="Amount"
-        onChange={(e) =>
-          setForm({ ...form, amount: e.target.value })
-        }
-      />
+        {/* DESCRIPTION */}
+        <div className="form-group">
+          <label>Description</label>
+          <input
+            placeholder="Enter description"
+            value={form.description}
+            onChange={(e) =>
+              setForm({ ...form, description: e.target.value })
+            }
+          />
+        </div>
 
-      <select
-        value={form.category}
-        onChange={(e) =>
-          setForm({ ...form, category: e.target.value })
-        }
-      >
-        {CATEGORIES.map((c) => (
-          <option key={c}>{c}</option>
-        ))}
-      </select>
+        {/* AMOUNT */}
+        <div className="form-group">
+          <label>Amount</label>
+          <input
+            type="number"
+            placeholder="Enter amount"
+            value={form.amount}
+            onChange={(e) =>
+              setForm({ ...form, amount: e.target.value })
+            }
+          />
+        </div>
 
-      <select
-        value={form.type}
-        onChange={(e) =>
-          setForm({ ...form, type: e.target.value })
-        }
-      >
-        <option value="expense">Expense</option>
-        <option value="income">Income</option>
-      </select>
+        {/* CATEGORY */}
+        <div className="form-group">
+          <label>Category</label>
+          <select
+            value={form.category}
+            onChange={(e) =>
+              setForm({ ...form, category: e.target.value })
+            }
+          >
+            {CATEGORIES.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+        </div>
 
-      <input
-        type="date"
-        value={form.date}
-        onChange={(e) =>
-          setForm({ ...form, date: e.target.value })
-        }
-      />
+        {/* TYPE */}
+        <div className="form-group">
+          <label>Type</label>
+          <select
+            value={form.type}
+            onChange={(e) =>
+              setForm({ ...form, type: e.target.value })
+            }
+          >
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
 
-      <button className="btn" onClick={handleSubmit}>
-        {editData ? "Update" : "Add"}
-      </button>
+        {/* DATE */}
+        <div className="form-group">
+          <label>Date</label>
+          <input
+            type="date"
+            value={form.date}
+            onChange={(e) =>
+              setForm({ ...form, date: e.target.value })
+            }
+          />
+        </div>
 
-      <button onClick={onClose}>Cancel</button>
+        {/* ACTION BUTTONS */}
+        <div className="modal-actions">
+          <button className="btn-primary" onClick={handleSubmit}>
+            {editData ? "Update" : "Add"}
+          </button>
+
+          <button className="btn-clear" onClick={onClose}>
+            Cancel
+          </button>
+        </div>
+
+      </div>
     </div>
   );
 }

@@ -4,89 +4,127 @@ import AddTransactionModal from "./AddTransactionModal";
 import { CATEGORIES } from "../data/mockData";
 
 export default function TransactionsTable() {
-  const {
-    transactions,
-    role,
-    searchQuery,
-    setSearchQuery,
-    deleteTransaction,
-  } = useApp();
+  const { transactions, role, deleteTransaction } = useApp();
+
+  const [search, setSearch] = useState("");
+  const [category, setCategory] = useState("all");
+  const [type, setType] = useState("all");
+  const [month, setMonth] = useState("all");
 
   const [open, setOpen] = useState(false);
   const [editTx, setEditTx] = useState(null);
 
-  const [category, setCategory] = useState("all");
-  const [type, setType] = useState("all");
-  const [month, setMonth] = useState("all");
+  // PAGINATION
   const [page, setPage] = useState(1);
+  const perPage = 10;
 
-  const ITEMS_PER_PAGE = 10;
+  // MONTH OPTIONS
+  const MONTHS = [
+    { value: "all", label: "All Months" },
+    { value: "01", label: "Jan" },
+    { value: "02", label: "Feb" },
+    { value: "03", label: "Mar" },
+    { value: "04", label: "Apr" },
+    { value: "05", label: "May" },
+    { value: "06", label: "Jun" },
+    { value: "07", label: "Jul" },
+    { value: "08", label: "Aug" },
+    { value: "09", label: "Sep" },
+    { value: "10", label: "Oct" },
+    { value: "11", label: "Nov" },
+    { value: "12", label: "Dec" },
+  ];
 
+  // FILTER LOGIC
   const filtered = transactions.filter((t) => {
-    const matchSearch = t.description
-      .toLowerCase()
-      .includes(searchQuery.toLowerCase());
+    const txMonth = t.date?.split("-")[1];
 
-    const matchCategory = category === "all" || t.category === category;
-    const matchType = type === "all" || t.type === type;
-
-    const matchMonth =
-      month === "all" ||
-      new Date(t.date).getMonth() + 1 === parseInt(month);
-
-    return matchSearch && matchCategory && matchType && matchMonth;
+    return (
+      t.description.toLowerCase().includes(search.toLowerCase()) &&
+      (category === "all" || t.category === category) &&
+      (type === "all" || t.type === type) &&
+      (month === "all" || txMonth === month)
+    );
   });
 
-  const totalPages = Math.ceil(filtered.length / ITEMS_PER_PAGE);
-  const start = (page - 1) * ITEMS_PER_PAGE;
-  const paginated = filtered.slice(start, start + ITEMS_PER_PAGE);
+  // PAGINATION LOGIC
+  const totalPages = Math.ceil(filtered.length / perPage);
+
+  const paginated = filtered.slice(
+    (page - 1) * perPage,
+    page * perPage
+  );
 
   return (
     <div className="card">
       <h2>Transactions</h2>
 
-      {/* TOP BAR */}
-      <div className="top-bar">
+      {/* TOOLBAR */}
+      <div className="toolbar-row">
         <input
-          className="search-small"
+          className="search-dark"
           placeholder="Search..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          value={search}
+          onChange={(e) => {
+            setSearch(e.target.value);
+            setPage(1);
+          }}
         />
 
-        <select onChange={(e) => setCategory(e.target.value)}>
+        <select value={category} onChange={(e) => {
+          setCategory(e.target.value);
+          setPage(1);
+        }}>
           <option value="all">All Categories</option>
           {CATEGORIES.map((c) => (
             <option key={c}>{c}</option>
           ))}
         </select>
 
-        <select onChange={(e) => setType(e.target.value)}>
+        <select value={type} onChange={(e) => {
+          setType(e.target.value);
+          setPage(1);
+        }}>
           <option value="all">All Types</option>
           <option value="income">Income</option>
           <option value="expense">Expense</option>
         </select>
 
-        <select onChange={(e) => setMonth(e.target.value)}>
-          <option value="all">All Months</option>
-          {[...Array(12)].map((_, i) => (
-            <option key={i} value={i + 1}>
-              {new Date(0, i).toLocaleString("default", {
-                month: "short",
-              })}
+        {/* MONTH FILTER */}
+        <select value={month} onChange={(e) => {
+          setMonth(e.target.value);
+          setPage(1);
+        }}>
+          {MONTHS.map((m) => (
+            <option key={m.value} value={m.value}>
+              {m.label}
             </option>
           ))}
         </select>
 
+        {/* CLEAR */}
+        <button
+          className="btn-clear"
+          onClick={() => {
+            setSearch("");
+            setCategory("all");
+            setType("all");
+            setMonth("all");
+            setPage(1);
+          }}
+        >
+          Clear
+        </button>
+
         {role === "admin" && (
-          <button className="btn" onClick={() => setOpen(true)}>
+          <button className="btn-primary" onClick={() => setOpen(true)}>
             + Add
           </button>
         )}
       </div>
 
       {/* TABLE */}
-      <table className="transactions-table">
+      <table className="table-pro">
         <thead>
           <tr>
             <th>Date</th>
@@ -99,50 +137,65 @@ export default function TransactionsTable() {
         </thead>
 
         <tbody>
-          {paginated.map((t) => (
-            <tr key={t.id}>
-              <td>{t.date}</td>
-              <td>{t.description}</td>
-
-              <td>
-                <span className={`badge cat-${t.category.toLowerCase()}`}>
-                  {t.category}
-                </span>
+          {paginated.length === 0 ? (
+            <tr>
+              <td colSpan="6" className="no-data">
+                No transactions found
               </td>
-
-              <td>
-                <span className={`type ${t.type}`}>
-                  {t.type.toUpperCase()}
-                </span>
-              </td>
-
-              <td className={t.type === "income" ? "income-text" : "expense-text"}>
-                ₹{t.amount}
-              </td>
-
-              {role === "admin" && (
-                <td>
-                  <button className="edit-btn" onClick={() => setEditTx(t)}>
-                    Edit
-                  </button>
-                  <button
-                    className="delete-btn"
-                    onClick={() => deleteTransaction(t.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              )}
             </tr>
-          ))}
+          ) : (
+            paginated.map((t) => (
+              <tr key={t.id}>
+                <td>{t.date}</td>
+
+                <td className="desc">{t.description}</td>
+
+                <td>
+                  <span className={`chip cat-${t.category.toLowerCase().replace(/\s+/g, "-")}`}>
+                    {t.category}
+                  </span>
+                </td>
+
+                <td>
+                  <span className={`tag ${t.type}`}>
+                    {t.type}
+                  </span>
+                </td>
+
+                <td className={t.type === "income" ? "green" : "red"}>
+                  ₹{t.amount}
+                </td>
+
+                {role === "admin" && (
+                  <td>
+                    <button
+                      className="btn-edit"
+                      onClick={() => setEditTx(t)}
+                    >
+                      Edit
+                    </button>
+
+                    <button
+                      className="btn-delete"
+                      onClick={() => deleteTransaction(t.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                )}
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
 
       {/* PAGINATION */}
-      <div className="pagination-bar">
-        <span>Page {page} of {totalPages || 1}</span>
+      {filtered.length > 0 && (
+        <div className="pagination-bar">
+          <span>
+            Page {page} of {totalPages}
+          </span>
 
-        <div>
           {[...Array(totalPages)].map((_, i) => (
             <button
               key={i}
@@ -153,9 +206,11 @@ export default function TransactionsTable() {
             </button>
           ))}
         </div>
-      </div>
+      )}
 
+      {/* MODALS */}
       {open && <AddTransactionModal onClose={() => setOpen(false)} />}
+
       {editTx && (
         <AddTransactionModal
           editData={editTx}

@@ -10,7 +10,7 @@ export default function Sidebar({ activePage, setActivePage }) {
 
   return (
     <aside className="sidebar">
-      <div className="sidebar-logo">Wealth<span>Flow</span></div>
+      <div className="sidebar-logo">Fin<span>Flow</span></div>
 
       {items.map(i => (
         <button
