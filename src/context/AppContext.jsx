@@ -17,24 +17,40 @@ export function AppProvider({ children }) {
   }, [transactions]);
 
   const addTransaction = (tx) =>
-    setTransactions(prev => [{ ...tx, id: Date.now() }, ...prev]);
+    setTransactions((prev) => [{ ...tx, id: Date.now() }, ...prev]);
 
   const deleteTransaction = (id) =>
-    setTransactions(prev => prev.filter(t => t.id !== id));
+    setTransactions((prev) => prev.filter((t) => t.id !== id));
 
-  const income = transactions.filter(t=>t.type==="income")
-    .reduce((a,b)=>a+b.amount,0);
+  const editTransaction = (updatedTx) =>
+    setTransactions((prev) =>
+      prev.map((t) => (t.id === updatedTx.id ? updatedTx : t))
+    );
 
-  const expense = transactions.filter(t=>t.type==="expense")
-    .reduce((a,b)=>a+b.amount,0);
+  const income = transactions
+    .filter((t) => t.type === "income")
+    .reduce((a, b) => a + b.amount, 0);
+
+  const expense = transactions
+    .filter((t) => t.type === "expense")
+    .reduce((a, b) => a + b.amount, 0);
 
   return (
-    <AppContext.Provider value={{
-      transactions, role, setRole,
-      searchQuery, setSearchQuery,
-      addTransaction, deleteTransaction,
-      income, expense, balance: income-expense
-    }}>
+    <AppContext.Provider
+      value={{
+        transactions,
+        role,
+        setRole,
+        searchQuery,
+        setSearchQuery,
+        addTransaction,
+        deleteTransaction,
+        editTransaction,
+        income,
+        expense,
+        balance: income - expense,
+      }}
+    >
       {children}
     </AppContext.Provider>
   );

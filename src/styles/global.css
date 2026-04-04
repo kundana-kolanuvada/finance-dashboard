@@ -61,3 +61,126 @@ body {
   margin-bottom:10px;
   width:100%;
 }
+
+/* FILTERS */
+.filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
+}
+
+.filters select {
+  padding: 8px;
+  border-radius: 6px;
+  border: none;
+  background: #2a2f4a;
+  color: white;
+}
+
+/* TABLE */
+.transactions-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.transactions-table th {
+  text-align: left;
+  padding: 10px;
+  color: #aaa;
+}
+
+.transactions-table td {
+  padding: 12px;
+  border-top: 1px solid #2a2f4a;
+}
+
+.transactions-table tr:hover {
+  background: #2a2f4a;
+}
+
+/* BADGES */
+.badge {
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 12px;
+}
+
+/* CATEGORY COLORS */
+.cat-food { background:#7c2d12; color:#fb923c; }
+.cat-salary { background:#064e3b; color:#34d399; }
+.cat-rent { background:#4c1d95; color:#c084fc; }
+.cat-transport { background:#1e3a8a; color:#60a5fa; }
+.cat-shopping { background:#831843; color:#f472b6; }
+.cat-health { background:#065f46; color:#6ee7b7; }
+.cat-travel { background:#78350f; color:#fbbf24; }
+.cat-freelance { background:#0e7490; color:#67e8f9; }
+
+/* TYPE */
+.type {
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.income { background:#022c22; color:#10b981; }
+.expense { background:#450a0a; color:#ef4444; }
+
+/* AMOUNT */
+.income-text { color:#10b981; }
+.expense-text { color:#ef4444; }
+
+/* BUTTONS */
+.btn {
+  background:#7c6af7;
+  border:none;
+  padding:8px 12px;
+  border-radius:6px;
+  color:white;
+  cursor:pointer;
+}
+
+.delete-btn {
+  background:#7f1d1d;
+  color:#fca5a5;
+  border:none;
+  padding:6px 10px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+/* PAGINATION */
+.pagination {
+  margin-top: 15px;
+  display: flex;
+  gap: 8px;
+}
+
+.pagination button {
+  padding: 6px 10px;
+  border: none;
+  background: #2a2f4a;
+  color: white;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.pagination .active-page {
+  background: #7c6af7;
+}
+
+/* MODAL */
+.modal {
+  position: fixed;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: #1c2038;
+  padding: 20px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
