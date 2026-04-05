@@ -5,10 +5,11 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
 
-  // TRANSACTIONS
+  // TRANSACTIONS LOCAL STORAGE
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem("tx");
     return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS;
+    // return MOCK_TRANSACTIONS;
   });
 
   // ROLE
@@ -23,10 +24,10 @@ export function AppProvider({ children }) {
     localStorage.setItem("tx", JSON.stringify(transactions));
   }, [transactions]);
 
-  // SAVE THEME + APPLY
+  // SAVE THEME
   useEffect(() => {
     localStorage.setItem("theme", theme);
-    document.body.className = theme; // 🔥 important
+    document.body.className = theme; 
   }, [theme]);
 
   // ADD
