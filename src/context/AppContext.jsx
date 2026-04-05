@@ -4,6 +4,7 @@ import { MOCK_TRANSACTIONS } from "../data/mockData";
 const AppContext = createContext();
 
 export function AppProvider({ children }) {
+
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem("tx");
     return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS;
@@ -11,6 +12,7 @@ export function AppProvider({ children }) {
 
   const [role, setRole] = useState("admin");
 
+  // LOCAL STORAGE
   useEffect(() => {
     localStorage.setItem("tx", JSON.stringify(transactions));
   }, [transactions]);
@@ -31,11 +33,13 @@ export function AppProvider({ children }) {
   // EDIT
   const editTransaction = (updatedTx) => {
     setTransactions(prev =>
-      prev.map(t => (t.id === updatedTx.id ? updatedTx : t))
+      prev.map(t =>
+        t.id === updatedTx.id ? updatedTx : t
+      )
     );
   };
 
-  // CALCULATION
+  // CALCULATIONS
   const income = transactions
     .filter(t => t.type === "income")
     .reduce((a, b) => a + b.amount, 0);
@@ -43,6 +47,8 @@ export function AppProvider({ children }) {
   const expense = transactions
     .filter(t => t.type === "expense")
     .reduce((a, b) => a + b.amount, 0);
+
+  const balance = income - expense;
 
   return (
     <AppContext.Provider
@@ -55,7 +61,7 @@ export function AppProvider({ children }) {
         editTransaction,
         income,
         expense,
-        balance: income - expense
+        balance
       }}
     >
       {children}

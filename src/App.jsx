@@ -5,6 +5,7 @@ import SummaryCards from "./components/SummaryCards";
 import TransactionsTable from "./components/TransactionsTable";
 import DashboardCharts from "./components/DashboardCharts";
 import RecentTransactions from "./components/RecentTransactions";
+import InsightsSection from "./components/InsightsSection"; // ✅ ADD THIS
 import "./styles/global.css";
 
 function AppContent() {
@@ -15,7 +16,7 @@ function AppContent() {
       <Sidebar activePage={page} setActivePage={setPage} />
 
       <main className="main-content">
-        
+
         {page === "dashboard" && (
           <>
             <div className="dashboard-section">
@@ -31,7 +32,10 @@ function AppContent() {
             </div>
           </>
         )}
+
         {page === "transactions" && <TransactionsTable />}
+        {page === "insights" && <InsightsSection />}
+
       </main>
     </div>
   );
