@@ -112,7 +112,7 @@ h3 {
 }
 
 .summary-card p {
-  font-size: 12px;
+  font-size: 15px;
   color: #9ca3af;
 }
 
@@ -295,6 +295,22 @@ h3 {
   padding: 2px 8px;
   border-radius: 6px;
   font-size: 12px;
+}
+
+.pagination-bar button:hover {
+  transform: scale(1.1);
+  color: white;
+}
+
+.pagination-bar button:hover {
+  transform: scale(1.1);
+  color: white;
+}
+
+.active-page {
+  background: #6366f1;
+  color: white;
+  transform: scale(1.05);
 }
 
 .active-page {
@@ -623,6 +639,10 @@ h3 {
   border: 1px solid #262626;
   padding: 16px;
   border-radius: 14px;
+}
+
+.insight-card:hover {
+  transform: translateY(-3px) scale(1.04);
 }
 
 .insight-card p {
