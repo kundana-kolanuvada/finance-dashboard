@@ -69,7 +69,6 @@ export default function InsightsSection() {
 
   return (
     <div className="insights-container">
-      <h2 className="insights-title">Insights & Analytics</h2>
 
       {/* CARDS */}
       <div className="insights-cards">

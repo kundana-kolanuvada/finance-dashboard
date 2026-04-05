@@ -57,7 +57,6 @@ export default function TransactionsTable() {
 
   return (
     <div className="card">
-      <h2>Transactions</h2>
 
       {/* TOOLBAR */}
       <div className="toolbar-row">

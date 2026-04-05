@@ -14,23 +14,19 @@ function AppContent() {
 
   return (
     <div className="app-layout">
-      <Sidebar activePage={page} setActivePage={setPage} />
+    <Sidebar activePage={page} setActivePage={setPage} />
+
+    <div className="main-wrapper">
+
+      <TopBar page={page} onAdd={() => alert("Open modal")} />
 
       <main className="main-content">
-        <TopBar onAdd={() => alert("Open Add Modal")} />
+
         {page === "dashboard" && (
           <>
-            <div className="dashboard-section">
-              <SummaryCards />
-            </div>
-
-            <div className="dashboard-section">
-              <DashboardCharts />
-            </div>
-
-            <div className="dashboard-section">
-              <RecentTransactions setPage={setPage} />
-            </div>
+            <SummaryCards />
+            <DashboardCharts />
+            <RecentTransactions setPage={setPage} />
           </>
         )}
 
@@ -39,6 +35,7 @@ function AppContent() {
 
       </main>
     </div>
+  </div>
   );
 }
 

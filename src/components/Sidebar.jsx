@@ -22,7 +22,6 @@ export default function Sidebar({ activePage, setActivePage }) {
         </button>
       ))}
 
-      <RoleSwitcher/>
     </aside>
   );
 }
