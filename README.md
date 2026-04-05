@@ -22,7 +22,7 @@ The project focuses on **clean UI design, component structure, and data handling
 
 ---
 
-## ⚙️ Technologies Used
+## Technologies Used
 
 | Category            | Technology Used |
 |--------------------|----------------|
@@ -33,7 +33,7 @@ The project focuses on **clean UI design, component structure, and data handling
 
 ---
 
-## 🛠️ Installation & Setup
+## Installation & Setup
 
 ```bash
 # Clone the repository
