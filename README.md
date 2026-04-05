@@ -29,6 +29,7 @@ The project focuses on **clean UI design, component structure, and data handling
 | Frontend           | ![React](https://img.shields.io/badge/React-20232A?logo=react&logoColor=61DAFB) |
 | Styling            | ![CSS](https://img.shields.io/badge/CSS-1572B6?logo=css3&logoColor=white) |
 | Charts             | ![Recharts](https://img.shields.io/badge/Recharts-FF6384?logo=chartdotjs&logoColor=white) |
+| State Management   | ![Context API](https://img.shields.io/badge/Context%20API-61DAFB?logo=react&logoColor=black) |
 | Data               | ![JSON](https://img.shields.io/badge/JSON-000000?logo=json&logoColor=white) |
 
 
