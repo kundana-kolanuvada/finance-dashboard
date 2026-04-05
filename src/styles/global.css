@@ -9,6 +9,7 @@ body {
   color: #e5e7eb;
   letter-spacing: 0.2px;
   overflow-x: hidden;
+  /* transition: background 0.3s ease, color 0.3s ease; */
 }
 
 /* LAYOUT */
@@ -20,7 +21,7 @@ body {
 /* SIDEBAR */
 .sidebar {
   width: 180px;
-  height: 100vh;
+  height: 95vh;
   background: #111111;
   padding: 20px;
   display: flex;
@@ -60,12 +61,19 @@ body {
 
 .nav-item:hover {
   background: #1a1a1a;
+  transform: translateX(4px);
 }
 
 /* MAIN */
 .main-content {
   flex: 1;
   padding: 0px 30px 30px 30px;
+  animation: fadeIn 0.3s ease;
+}
+
+.summary-card:hover,
+.insight-card:hover {
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
 
 /* CARD */
@@ -104,12 +112,8 @@ h3 {
   padding: 16px;
   border-radius: 12px;
   border: 1px solid #262626;
-  transition: 0.3s;
 }
 
-.summary-card:hover {
-  transform: translateY(-3px);
-}
 
 .summary-card p {
   font-size: 15px;
@@ -173,6 +177,10 @@ h3 {
 
 .btn-primary:hover {
   opacity: 0.9;
+}
+
+button:active {
+  transform: scale(0.95);
 }
 
 /* TABLE */
@@ -715,7 +723,7 @@ h3 {
   position: sticky;
   top: 0;
   background: #141414;
-  padding: 10px 20px;
+  padding: 5px 20px;
   border-bottom: 1px solid #262626;
   display: flex;     
   justify-content: space-between; 
@@ -724,8 +732,8 @@ h3 {
 
 /* TITLE */
 .topbar-title {
-  font-size: 18px;
-  font-weight: 600;
+  font-size: 15px;
+  font-weight: 500;
   color: #e5e7eb;
 }
 
@@ -802,4 +810,217 @@ h3 {
   height: 100vh;
   display: flex;
   flex-direction: column;
+}
+
+/* ----------- LIGHT MODE OVERRIDE ------------------*/
+
+body.light {
+  background: #f5f6fa;
+  color: #111;
+}
+
+/* SIDEBAR */
+body.light .sidebar {
+  background: #ffffff;
+  border-right: 1px solid #ddd;
+}
+
+/* TOPBAR */
+body.light .topbar {
+  background: #ffffff;
+  border-bottom: 1px solid #ddd;
+}
+
+/* NAV ITEMS */
+body.light .nav-item {
+  color: #555;
+}
+
+body.light .nav-item.active {
+  background: #eeeeee;
+  color: #000;
+}
+
+body.light .nav-item:hover {
+  background: #f2f2f2;
+}
+
+/* CARDS */
+body.light .card,
+body.light .summary-card,
+body.light .insight-card,
+body.light .chart-box {
+  background: #ffffff;
+  border: 1px solid #dddddd;
+}
+
+/* TEXT COLORS */
+body.light .summary-card p,
+body.light .insight-card p {
+  color: #666;
+}
+
+body.light h1,
+body.light h2,
+body.light h3 {
+  color: #111;
+}
+
+/* TABLE */
+body.light .table-pro th {
+  color: #666;
+  border-bottom: 1px solid #ddd;
+}
+
+body.light .table-pro td {
+  border-bottom: 1px solid #eee;
+}
+
+body.light .table-pro tr:hover td {
+  background: #f9f9f9;
+}
+
+/* INPUTS */
+body.light input,
+body.light select {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  color: #000;
+}
+
+/* BUTTONS */
+body.light .btn-clear {
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+body.light .btn-primary {
+  background: #6366f1;
+  color: white;
+}
+
+/* PAGINATION */
+body.light .pagination-bar button {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+body.light .pagination-bar button:hover {
+  background: #f0f0f0;
+}
+
+/* MODAL */
+body.light .modal {
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.light .modal input,
+body.light .modal select {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  color: #000;
+}
+
+/* DROPDOWNS */
+body.light .export-dropdown {
+  background: #ffffff;
+  border: 1px solid #ddd;
+}
+
+body.light .export-dropdown div:hover {
+  background: #f2f2f2;
+}
+
+/* TOOLTIP */
+body.light .custom-tooltip {
+  background: #ffffff;
+  color: #000;
+  border: 1px solid #ccc;
+}
+
+/* CATEGORY BAR */
+body.light .cat-bar {
+  background: #e5e7eb;
+}
+
+/* RANGE DROPDOWN */
+body.light .range-dropdown {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  color: #333;
+}
+
+/* TOGGLE CONTAINER */
+.theme-toggle {
+  margin-top: auto;
+}
+
+/* SWITCH */
+.toggle-switch {
+  width: 60px;
+  height: 28px;
+  border-radius: 999px;
+  cursor: pointer;
+  position: relative;
+}
+
+/* TRACK */
+.toggle-track {
+  width: 100%;
+  height: 100%;
+  border-radius: 999px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+/* DARK TRACK */
+body.dark .toggle-track {
+  background: #1f1f1f;
+}
+
+/* LIGHT TRACK */
+body.light .toggle-track {
+  background: #e5e7eb;
+}
+
+/* THUMB (MOVING CIRCLE) */
+.toggle-thumb {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  position: absolute;
+  top: 2px;
+  left: 3px;
+  transition: all 0.3s ease;
+}
+
+/* DARK MODE POSITION */
+body.dark .toggle-thumb {
+  background: #111;
+  transform: translateX(0);
+}
+
+/* LIGHT MODE POSITION */
+body.light .toggle-thumb {
+  background: #fff;
+  transform: translateX(30px);
+}
+
+/* ICONS */
+.icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 12px;
+  pointer-events: none;
+}
+
+.sun {
+  right: 8px;
+}
+
+.moon {
+  left: 8px;
 }

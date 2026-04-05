@@ -5,17 +5,29 @@ const AppContext = createContext();
 
 export function AppProvider({ children }) {
 
+  // TRANSACTIONS
   const [transactions, setTransactions] = useState(() => {
     const saved = localStorage.getItem("tx");
     return saved ? JSON.parse(saved) : MOCK_TRANSACTIONS;
   });
 
+  // ROLE
   const [role, setRole] = useState("admin");
 
-  // LOCAL STORAGE
+  const [theme, setTheme] = useState(() => {
+    return localStorage.getItem("theme") || "dark";
+  });
+
+  // SAVE TRANSACTIONS
   useEffect(() => {
     localStorage.setItem("tx", JSON.stringify(transactions));
   }, [transactions]);
+
+  // SAVE THEME + APPLY
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.body.className = theme; // 🔥 important
+  }, [theme]);
 
   // ADD
   const addTransaction = (tx) => {
@@ -33,9 +45,7 @@ export function AppProvider({ children }) {
   // EDIT
   const editTransaction = (updatedTx) => {
     setTransactions(prev =>
-      prev.map(t =>
-        t.id === updatedTx.id ? updatedTx : t
-      )
+      prev.map(t => (t.id === updatedTx.id ? updatedTx : t))
     );
   };
 
@@ -48,8 +58,6 @@ export function AppProvider({ children }) {
     .filter(t => t.type === "expense")
     .reduce((a, b) => a + b.amount, 0);
 
-  const balance = income - expense;
-
   return (
     <AppContext.Provider
       value={{
@@ -61,7 +69,9 @@ export function AppProvider({ children }) {
         editTransaction,
         income,
         expense,
-        balance
+        balance: income - expense,
+        theme,      
+        setTheme    
       }}
     >
       {children}
