@@ -5,7 +5,8 @@ import SummaryCards from "./components/SummaryCards";
 import TransactionsTable from "./components/TransactionsTable";
 import DashboardCharts from "./components/DashboardCharts";
 import RecentTransactions from "./components/RecentTransactions";
-import InsightsSection from "./components/InsightsSection"; // ✅ ADD THIS
+import InsightsSection from "./components/InsightsSection";
+import TopBar from "./components/TopBar"
 import "./styles/global.css";
 
 function AppContent() {
@@ -16,7 +17,7 @@ function AppContent() {
       <Sidebar activePage={page} setActivePage={setPage} />
 
       <main className="main-content">
-
+        <TopBar onAdd={() => alert("Open Add Modal")} />
         {page === "dashboard" && (
           <>
             <div className="dashboard-section">

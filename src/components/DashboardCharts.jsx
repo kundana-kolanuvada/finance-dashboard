@@ -82,7 +82,6 @@ export default function DashboardCharts() {
     percent: ((value / total) * 100).toFixed(0),
   }));
 
-  // pastel colors
   const COLORS = [
     "#a5b4fc",
     "#6ee7b7",

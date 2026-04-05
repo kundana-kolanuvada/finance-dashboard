@@ -62,8 +62,7 @@ body {
 /* MAIN */
 .main-content {
   flex: 1;
-  padding: 25px;
-  overflow-y: auto;
+  padding: 0px 30px 30px 30px;
 }
 
 /* CARD */
@@ -459,7 +458,7 @@ h3 {
   }
 
   .nav-item {
-    display: none; /* hide menu items */
+    display: none;
   }
 
   /* Main content */
@@ -685,4 +684,91 @@ h3 {
 .cat-fill {
   height: 100%;
   background: linear-gradient(90deg, #9333ea, #6366f1);
+}
+
+/* TOPBAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #141414;
+  padding: 16px 20px;
+  border-bottom: 1px solid #262626;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  top: 0;
+}
+
+/* TITLE */
+.topbar-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #e5e7eb;
+}
+
+/* RIGHT SIDE */
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ROLE */
+.role-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.role-label {
+  font-size: 13px;
+  color: #9ca3af;
+}
+
+/* DROPDOWN BOX */
+.role-select {
+  background: #1f1f1f;
+  border: 1px solid #262626;
+  color: white;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-size: 13px;
+}
+
+/* EXPORT */
+.export-box {
+  position: relative;
+}
+
+.export-box button {
+  background: #1f1f1f;
+  border: 1px solid #262626;
+  color: #e5e7eb;
+  padding: 6px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* DROPDOWN */
+.export-dropdown {
+  position: absolute;
+  top: 42px;
+  right: 0;
+  background: #161616;
+  border: 1px solid #262626;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 160px;
+  z-index: 100;
+}
+
+.export-dropdown div {
+  padding: 10px 14px;
+  cursor: pointer;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.export-dropdown div:hover {
+  background: #1f1f1f;
 }
