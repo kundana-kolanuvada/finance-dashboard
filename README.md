@@ -27,7 +27,7 @@ The project focuses on **clean UI design, component structure, and data handling
 | Category            | Technology Used |
 |--------------------|----------------|
 | Frontend           | <img src="https://skillicons.dev/icons?i=react" height="25"/> React.js |
-| Styling            | <img src="https://skillicons.dev/icons?i=css,tailwind" height="25"/> CSS / Tailwind |
+| Styling            | <img src="https://skillicons.dev/icons?i=css" height="25"/> CSS|
 | Charts             | <img src="https://skillicons.dev/icons?i=react" height="25"/> Recharts |
 | Data               | <img src="https://skillicons.dev/icons?i=js" height="25"/> Mock Data (JSON) |
 
