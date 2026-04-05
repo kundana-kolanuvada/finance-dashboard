@@ -1,16 +1,49 @@
-# React + Vite
+# Finance Dashboard UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## About the Project
+This is a **frontend-only Finance Dashboard UI** that helps users visualize financial data, track transactions, and understand spending patterns.  
 
-Currently, two official plugins are available:
+The project focuses on **clean UI design, component structure, and data handling** using mock data, without any backend integration.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## Features
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Dashboard with summary cards (Balance, Income, Expenses)
+- Charts for:
+  - Time-based trends
+  - Category-wise spending
+- Transactions table with:
+  - Date, Amount, Category, Type
+- Search, Filter, and Sorting functionality
+- Role-based UI (Viewer / Admin simulation)
+- Insights (spending patterns, comparisons)
+- Responsive and clean UI
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ⚙️ Technologies Used
+
+| Category            | Technology Used |
+|--------------------|----------------|
+| Frontend           | <img src="https://skillicons.dev/icons?i=react" height="25"/> React.js |
+| Styling            | <img src="https://skillicons.dev/icons?i=css,tailwind" height="25"/> CSS / Tailwind |
+| Charts             | <img src="https://skillicons.dev/icons?i=react" height="25"/> Recharts |
+| Data               | <img src="https://skillicons.dev/icons?i=js" height="25"/> Mock Data (JSON) |
+
+---
+
+## 🛠️ Installation & Setup
+
+```bash
+# Clone the repository
+git clone https://github.com/kundana-kolanuvada/finance-dashboard
+
+# Navigate to project folder
+cd finance-dashboard
+
+# Install dependencies
+npm install
+
+# Start development server
+npm run dev
