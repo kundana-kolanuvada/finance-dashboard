@@ -9,7 +9,6 @@ body {
   color: #e5e7eb;
   letter-spacing: 0.2px;
   overflow-x: hidden;
-  /* transition: background 0.3s ease, color 0.3s ease; */
 }
 
 /* LAYOUT */
@@ -71,7 +70,6 @@ body {
   animation: fadeIn 0.3s ease;
 }
 
-.summary-card:hover,
 .insight-card:hover {
   box-shadow: 0 10px 25px rgba(0,0,0,0.3);
 }
@@ -1023,4 +1021,14 @@ body.light .toggle-thumb {
 
 .moon {
   left: 8px;
+}
+
+.summary-card {
+  transform: none !important;
+  transition: none !important;
+}
+
+.summary-card:hover {
+  transform: none !important;
+  box-shadow: none !important;
 }

@@ -83,12 +83,16 @@ export default function DashboardCharts() {
   }));
 
   const COLORS = [
-    "#a5b4fc",
-    "#6ee7b7",
-    "#fca5a5",
-    "#fde68a",
-    "#93c5fd",
-    "#f9a8d4",
+    "#7c3aed", 
+    "#22c55e", 
+    "#ef4444",
+    "#3b82f6",
+    "#f59e0b",
+    "#ec4899",
+    "#14b8a6", 
+    "#eab308",
+    "#d47018", 
+    "#f97316",
   ];
 
   const CustomTooltip = ({ active, payload, label }) => {
@@ -111,7 +115,6 @@ export default function DashboardCharts() {
         <div className="custom-tooltip">
           <p>{data.name}</p>
           <p>₹{data.value}</p>
-          <p>{data.percent}%</p>
         </div>
       );
     }
